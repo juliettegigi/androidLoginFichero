@@ -38,7 +38,6 @@ public class ApiClient {
             BufferedOutputStream bos=new BufferedOutputStream(fos);
             oos=new ObjectOutputStream(bos);
             oos.writeObject(user);
-            Log.d("Salida","qqqqqqq");
             bos.flush();
             oos.close();
 

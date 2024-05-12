@@ -32,7 +32,7 @@ public class RegistroViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> mutableCerrar;
     private MutableLiveData<Usuario> mutableUsuario;
     private MutableLiveData<Bitmap> mutableFoto;
-    
+
 
     public RegistroViewModel(@NonNull Application application) {
         super(application);
@@ -74,8 +74,12 @@ public class RegistroViewModel extends AndroidViewModel {
             }
             if(dni.toString().isEmpty())
                 dni="0";
-            ApiClient.guardarImageBytes(getApplication(),mutableFoto.getValue(),"imagen1.png");
-            Usuario usuario = new Usuario(Long.parseLong(dni.toString()), apellido.toString(), nombre.toString(), email.toString(), pass.toString(),"imagen1.png");
+            Usuario usuario;
+            if(mutableFoto.getValue()!=null) {
+                ApiClient.guardarImageBytes(getApplication(), mutableFoto.getValue(), "imagen1.png");
+                usuario = new Usuario(Long.parseLong(dni.toString()), apellido.toString(), nombre.toString(), email.toString(), pass.toString(),  "imagen1.png" );
+            }
+            else usuario=new Usuario(Long.parseLong(dni.toString()), apellido.toString(), nombre.toString(), email.toString(), pass.toString());
             ApiClient.guardar(getApplication(), usuario);
             mutableCerrar.setValue(true);
         }
@@ -92,9 +96,12 @@ public class RegistroViewModel extends AndroidViewModel {
         if (intent != null) {
             if (intent.hasExtra("usuario")) {
                 Usuario usuario = (Usuario) intent.getSerializableExtra("usuario");
-                Bitmap img=ApiClient.leerImagenBytes(getApplication(), usuario.getImg());
-                if(mutableFoto==null)mutableFoto=new MutableLiveData<>();
-               mutableFoto.setValue(img);
+                Log.d("salida",usuario.toString());
+                if(usuario.getImg()!=null){
+                      Bitmap img=ApiClient.leerImagenBytes(getApplication(), usuario.getImg());
+                      if(mutableFoto==null)mutableFoto=new MutableLiveData<>();
+                     mutableFoto.setValue(img);
+                }
                 mutableUsuario.setValue(usuario);
             }
         }
