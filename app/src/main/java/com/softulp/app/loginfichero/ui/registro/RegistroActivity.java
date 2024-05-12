@@ -18,6 +18,8 @@ import android.view.View;
 import android.widget.Toast;
 
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -29,21 +31,23 @@ import androidx.lifecycle.ViewModelProvider;
 //import com.softulp.app.loginfichero.Manifest;
 import com.softulp.app.loginfichero.databinding.ActivityRegistroBinding;
 import com.softulp.app.loginfichero.models.Usuario;
-
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.activity.result.ActivityResult;
 public class RegistroActivity extends AppCompatActivity {
    private ActivityRegistroBinding binding;
     private  RegistroViewModel vm;
     private static final int REQUEST_IMAGE_CAPTURE=1;
-    private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
+    private Intent intent;
+    private ActivityResultLauncher<Intent> arl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityRegistroBinding.inflate(getLayoutInflater());
-        vm=new ViewModelProvider(this).get(RegistroViewModel.class);
+        vm=new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(RegistroViewModel.class);
         setContentView(binding.getRoot());
 
 
-
+        abrirGaleria();
 
         vm.getMutableCerrar().observe(this, new Observer<Boolean>() {
             @Override
@@ -65,7 +69,16 @@ public class RegistroActivity extends AppCompatActivity {
         });
         vm.checkIntent(getIntent());
 
+        abrirGaleria();
 
+
+
+        binding.btnSubirFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                arl.launch(intent);
+            }
+        });
         binding.btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,6 +191,23 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
 
+    private void abrirGaleria(){
 
+
+        intent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+
+        arl=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                vm.recibirFoto(result);
+
+
+            }
+        });
+
+
+
+    }
 
 }

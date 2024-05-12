@@ -4,7 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -25,11 +27,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import static android.app.Activity.RESULT_OK;
-
+import androidx.activity.result.ActivityResult;
 public class RegistroViewModel extends AndroidViewModel {
-    MutableLiveData<Boolean> mutableCerrar;
-    MutableLiveData<Usuario> mutableUsuario;
+    private MutableLiveData<Boolean> mutableCerrar;
+    private MutableLiveData<Usuario> mutableUsuario;
     private MutableLiveData<Bitmap> mutableFoto;
+    
 
     public RegistroViewModel(@NonNull Application application) {
         super(application);
@@ -40,6 +43,8 @@ public class RegistroViewModel extends AndroidViewModel {
         }
         return mutableCerrar;
     }
+
+
 
     public LiveData<Usuario> getMutableUsuario(){
         if(mutableUsuario==null){
@@ -118,6 +123,20 @@ public class RegistroViewModel extends AndroidViewModel {
         }
     }
 
+    public void recibirFoto(ActivityResult result) {
+        if(result.getResultCode() == RESULT_OK){
+            Intent data=result.getData();
+            Uri uri=data.getData();
+          //  mutableUri.setValue(uri);
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplication().getContentResolver(), uri);
+                mutableFoto.setValue(bitmap);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
+
+        }
+    }
 
 }
