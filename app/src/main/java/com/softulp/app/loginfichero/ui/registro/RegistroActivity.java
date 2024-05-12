@@ -2,18 +2,16 @@ package com.softulp.app.loginfichero.ui.registro;
 
 import static android.Manifest.permission.CAMERA;
 
-import android.Manifest;
+
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,11 +22,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-//import com.softulp.app.loginfichero.Manifest;
 import com.softulp.app.loginfichero.databinding.ActivityRegistroBinding;
 import com.softulp.app.loginfichero.models.Usuario;
 import androidx.activity.result.contract.ActivityResultContracts;

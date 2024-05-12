@@ -1,13 +1,12 @@
 package com.softulp.app.loginfichero.ui.registro;
 
 import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,11 +19,8 @@ import com.softulp.app.loginfichero.models.ExceptionUsuario;
 import com.softulp.app.loginfichero.models.Usuario;
 import com.softulp.app.loginfichero.request.ApiClient;
 
-import java.io.BufferedOutputStream;
+
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import static android.app.Activity.RESULT_OK;
 import androidx.activity.result.ActivityResult;
@@ -96,7 +92,7 @@ public class RegistroViewModel extends AndroidViewModel {
         if (intent != null) {
             if (intent.hasExtra("usuario")) {
                 Usuario usuario = (Usuario) intent.getSerializableExtra("usuario");
-                Log.d("salida",usuario.toString());
+
                 if(usuario.getImg()!=null){
                       Bitmap img=ApiClient.leerImagenBytes(getApplication(), usuario.getImg());
                       if(mutableFoto==null)mutableFoto=new MutableLiveData<>();
@@ -108,7 +104,7 @@ public class RegistroViewModel extends AndroidViewModel {
     }
 
     public void respuestaDeCamara(int requestCode, int resultCode, @Nullable Intent data, int REQUEST_IMAGE_CAPTURE){
-        Log.d("salida",requestCode+"");
+
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             //Recupero los datos provenientes de la camara.
             Bundle extras = data.getExtras();

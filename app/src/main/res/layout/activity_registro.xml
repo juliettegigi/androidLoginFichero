@@ -94,6 +94,7 @@
         android:id="@+id/imageView"
         android:layout_width="94dp"
         android:layout_height="94dp"
+        android:background="@drawable/img"
         android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.892"

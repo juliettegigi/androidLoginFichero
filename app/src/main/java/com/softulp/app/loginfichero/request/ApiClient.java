@@ -1,10 +1,8 @@
 package com.softulp.app.loginfichero.request;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.softulp.app.loginfichero.models.Usuario;

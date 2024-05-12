@@ -2,7 +2,6 @@ package com.softulp.app.loginfichero.ui.login;
 
 import android.app.Application;
 import android.content.Intent;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
