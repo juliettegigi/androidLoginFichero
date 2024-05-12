@@ -8,17 +8,34 @@ public class Usuario implements Serializable {
     private String nombre;
     private String email;
     private String pass;
+    private String img;
 
     public Usuario(){
 
     }
 
+    public Usuario(long dni, String apellido, String nombre, String email, String pass,String img) {
+        this.dni = dni;
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.email = email;
+        this.pass = pass;
+        this.img = img;
+    }
     public Usuario(long dni, String apellido, String nombre, String email, String pass) {
         this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
         this.email = email;
         this.pass = pass;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public long getDni() {
@@ -69,6 +86,7 @@ public class Usuario implements Serializable {
                 ", nombre='" + nombre + '\'' +
                 ", email='" + email + '\'' +
                 ", pass='" + pass + '\'' +
+                ", img='" + img + '\'' +
                 '}';
     }
 }

@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         vm=new ViewModelProvider(this).get(MainViewModel.class);
-        EdgeToEdge.enable(this);
+
         setContentView(binding.getRoot());
 
         vm.getMutableMsgError().observe(this, new Observer<String>() {
@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

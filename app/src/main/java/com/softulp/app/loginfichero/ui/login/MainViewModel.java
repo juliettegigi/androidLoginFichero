@@ -2,6 +2,7 @@ package com.softulp.app.loginfichero.ui.login;
 
 import android.app.Application;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -25,6 +26,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void validar(String email,String pass){
+
         Usuario usuario= ApiClient.login(getApplication(),email,pass);
         if(usuario==null) {
             mutableMsgError.setValue("Email o contraseña incorrectos.");

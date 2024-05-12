@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">loginfichero</string>
+    <string name="text_registrarme"><u>Registrarme</u></string>
 </resources>
